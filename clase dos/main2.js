@@ -37,25 +37,4 @@ let entrada = () => {
 };
  */
 
-const obj = {
-  valor1: 1,
-  valor2: 2,
-  valor3: 3,
-  valor4: 4,
-  valor4: 5,
-};
 
-let sum = 0;
-
-for (const value of Object.values(obj)) {
-  sum += value;
-}
-console.log(sum);
-
-const numbers = [65, 44, 12, 4];
-const newArr = numbers.map(myFunction);
-
-function myFunction(num) {
-  return num * 10;
-}
-console.log(newArr);
