@@ -18,7 +18,7 @@
     <div class="container py-2">
       <h1>Agenda de contactos</h1>
       <div class="input">
-        <form action="" class="input-boxes">
+        <form action="" class="div-inputs">
           <input type="number" name="dni" id="input-dni" placeholder="dni" />
           <input
             type="text"
@@ -59,18 +59,7 @@
       </div>
     </div>
     <div class="output">
-      <table class="agenda" id="agenda">
-        <thead>
-          <tr>
-            <th id="encabezadoDNI">DNI</th>
-            <th id="encabezadoNombre">Nombre</th>
-            <th id="encabezadoApellido">Apellido</th>
-            <th id="encabezadoTelefono">Teléfono</th>
-            <th class="encabezadoBotonEditar"></th>
-          </tr>
-        </thead>
-        <tbody class="agendaContent" id="agendaContent"></tbody>
-      </table>
+      <div id="contenedorContactos"></div>
     </div>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"

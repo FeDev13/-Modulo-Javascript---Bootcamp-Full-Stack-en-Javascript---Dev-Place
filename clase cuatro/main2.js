@@ -4,12 +4,8 @@ const inputApellido = document.getElementById("input-apellido");
 const inputTel = document.getElementById("input-tel");
 const buttonAgregar = document.getElementById("agregarContacto");
 const buttonEliminar = document.getElementById("eliminarContacto");
-const buttonMostrar = document.getElementById("mostrarAgenda");
-const tableAgenda = document.getElementById("agendaContent");
-const encabezadoDNI = document.getElementById("encabezadoDNI");
-const encabezadoNombre = document.getElementById("encabezadoNombre");
-const encabezadoApellido = document.getElementById("encabezadoApellido");
-const encabezadoTelefono = document.getElementById("encabezadoTelefono");
+const renderDom = document.getElementById("div-vacio");
+const contactosLista = document.getElementById("contenedorContactos");
 
 let agenda = [];
 
@@ -25,19 +21,6 @@ class Contacto {
     this.apellido = apellido;
     this.telefono = telefono;
   }
-
-  toString() {
-    return `DNI: ${this.dni} \nNombre: ${this.nombre} \nApellido: ${this.apellido} \nTeléfono: ${this.telefono}`;
-  }
-
-  toTableRow() {
-    return `<tr>
-    <td>${this.dni}</td>
-    <td>${this.nombre}</td>
-    <td>${this.apellido}</td>
-    <td>${this.telefono}</td>
-    </tr>`;
-  }
 }
 
 let agregarContacto = (contacto) => {
@@ -45,13 +28,13 @@ let agregarContacto = (contacto) => {
 };
 
 let buscarPorContacto = (DNI) => {
-  let int = null;
+  let index = null;
   agenda.forEach((contacto, i) => {
     if (contacto.dni == DNI) {
-      int = i;
+      index = i;
     }
   });
-  return int;
+  return index;
 };
 
 //Se agrega el contacto
@@ -78,20 +61,20 @@ buttonAgregar.onclick = () => {
         )
       );
       Swal.fire("Contacto agendado");
-      limpiarInputs();
-      refrescar();
+      /* limpiarInputs();
+      refrescar(); */
+      renderCards();
     }
   }
 };
 
 let eliminarPorDNI = (dni) => {
   let resultado = false;
-  let pos = buscarPorContacto(dni);
-  if (pos !== null) {
-    agenda.splice(pos, 1);
+  let cont = buscarPorContacto(dni);
+  if (cont !== null) {
+    agenda.splice(cont, 1);
     resultado = true;
   }
-  return resultado;
 };
 
 buttonEliminar.onclick = () => {
@@ -100,63 +83,25 @@ buttonEliminar.onclick = () => {
     icon: "error",
     text: "contacto eliminado",
   });
+  console.log(agenda);
+  contactosLista.innerHTML = "";
 };
 
-buttonMostrar.onclick = () => {
-  refrescar();
-};
-
-function refrescar() {
-  limpiarTabla();
-  let ind = 0;
-
-  agenda.map((contacto) => {
-    const rowNode = document.createElement("tr");
-
-    let cellNode = document.createElement("td");
-    let textNode = document.createTextNode(contacto.dni);
-    cellNode.appendChild(textNode);
-    rowNode.appendChild(cellNode);
-
-    cellNode = document.createElement("td");
-    textNode = document.createTextNode(contacto.nombre);
-    cellNode.appendChild(textNode);
-    rowNode.appendChild(cellNode);
-
-    cellNode = document.createElement("td");
-    textNode = document.createTextNode(contacto.apellido);
-    cellNode.appendChild(textNode);
-    rowNode.appendChild(cellNode);
-
-    cellNode = document.createElement("td");
-    //textNode = document.createTextNode(contacto.telefono);
-    //cellNode.appendChild(textNode);
-    cellNode.innerHTML = contacto.telefono; //FORMA DE AGREGARLE EL TEXTO INTERNO SIN CREAR TEXTNODE
-    rowNode.appendChild(cellNode);
-
-    //Botón editar
-    cellNode = document.createElement("td");
-    let buttonNode = document.createElement("button");
-    buttonNode.innerHTML = "editar";
-    //mmm....
-    buttonNode.setAttribute("pos", `${ind}`);
-    buttonNode.setAttribute("onclick", `alert(${ind});`);
-    ind++;
-    rowNode.appendChild(buttonNode);
-
-    tableAgenda.appendChild(rowNode);
+const renderCards = () => {
+  let contactosPanelVista = "";
+  agenda.forEach((contacto) => {
+    let { dni, nombre, apellido, telefono } = contacto;
+    contactosPanelVista += `<div class="col-12 mb-2 col-md-4 col-sm-4 panel">
+            <div class="card panel1" style="background-color:rgba(214, 169, 164, 0.1);">
+            <div class="card-body">
+            <h5 id="tituloProducto">${nombre}</h5>
+            <h5 id="descripcionProducto">${apellido}</h5>
+            <h5 id="precioProducto">${telefono}</h5>
+            </div>
+            </div>
+            </div>
+            `;
   });
-}
-
-function limpiarTabla() {
-  while (tableAgenda.firstChild) {
-    tableAgenda.removeChild(tableAgenda.lastChild);
-  }
-}
-
-function limpiarInputs() {
-  inputDNI.value = "";
-  inputNombre.value = "";
-  inputApellido.value = "";
-  inputTel.value = "";
-}
+  contactosLista.innerHTML = contactosPanelVista;
+};
+renderCards();
