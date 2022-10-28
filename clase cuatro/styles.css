@@ -1,0 +1,85 @@
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+h1{
+    text-align: center;
+}
+body{
+    background-image: linear-gradient(120deg, #e2c35d, #d88771);
+}
+.container{
+    margin-top: 3rem;
+}
+
+.flex-container{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+
+}
+
+.input {
+    margin: 2rem;
+    
+}
+
+.input-boxes{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    
+}
+
+.input-boxes>input{
+    padding: 5px;
+    margin: 5px;
+    width: 22%;
+}
+
+.botones {
+    margin-top: 3rem;
+    margin-left: 1rem;
+    flex-direction: row;
+    justify-content: space-around;
+}
+.individual {
+    margin-left: 0;
+    margin-top: 2rem;
+}
+
+.agenda{
+    padding: 5px;
+    margin: 5px;
+    width: 100%;
+    border-style: solid;
+    border-color: black;
+    border-width: 1px;
+    margin-top: 20px;
+    border-collapse: collapse;
+    color:white;
+}
+
+th, td{
+    border-style: solid;
+    border-width: 0px 1px;
+    margin: 0px;
+    border-color: black;
+    color: white;
+    background-color: black;
+}
+
+thead{
+    background-color: black;
+    border-bottom: 1px;
+    border-style: solid;
+    color: white;
+}
+
+/*TO DO*/
+#encabezadoBotonEditar{
+    border-width: 0px;
+}
