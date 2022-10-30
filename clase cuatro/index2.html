@@ -18,7 +18,7 @@
     <div class="container py-2">
       <h1>Agenda de contactos</h1>
       <div class="input">
-        <form action="" class="div-inputs">
+        <form action="" class="div-inputs" id="form">
           <input type="number" name="dni" id="input-dni" placeholder="dni" />
           <input
             type="text"
@@ -45,18 +45,24 @@
               Agregar contacto
             </button>
           </div>
+
           <div class="individual">
-            <button class="btn btn-danger" id="eliminarContacto">
-              Eliminar contacto
-            </button>
-          </div>
-          <div class="individual">
-            <button class="btn btn-success" id="mostrarAgenda">
-              Actualizar
-            </button>
+            <button class="btn btn-success" id="ordenarAgenda">Ordenar</button>
           </div>
         </div>
       </div>
+    </div>
+    <div class="container2">
+      <form class="d-flex" role="search">
+        <input
+          class="form-control me-2"
+          type="search"
+          placeholder="Ingrese datos"
+          aria-label="Search"
+          id="search"
+        />
+        <button class="btn btn-outline-secondary" id="buscar">Buscar</button>
+      </form>
     </div>
     <div class="output">
       <div id="contenedorContactos"></div>
