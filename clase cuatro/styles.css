@@ -64,21 +64,7 @@ body{
     color:white;
 }
 
-th, td{
-    border-style: solid;
-    border-width: 0px 1px;
-    margin: 0px;
-    border-color: black;
-    color: white;
-    background-color: black;
-}
 
-thead{
-    background-color: black;
-    border-bottom: 1px;
-    border-style: solid;
-    color: white;
-}
 
 
 .panel1 {

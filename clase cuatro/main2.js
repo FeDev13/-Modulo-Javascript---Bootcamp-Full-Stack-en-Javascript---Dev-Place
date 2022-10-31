@@ -5,6 +5,7 @@ const inputTel = document.getElementById("input-tel");
 const buttonAgregar = document.getElementById("agregarContacto");
 const buttonEliminar = document.getElementById("eliminarContacto");
 const contactosLista = document.getElementById("contenedorContactos");
+const contactosBusqueda = document.getElementById("contenedorBusqueda");
 const form = document.getElementById("form");
 const buttonOrdenar = document.getElementById("ordenarAgenda");
 
@@ -138,13 +139,38 @@ buttonAgregar.addEventListener("click", () => {
 });
 
 //buscar
-/* document.getElementById("buscar").addEventListener("click", (e) => {
+document.getElementById("buscar").addEventListener("click", (e) => {
+  e.preventDefault();
   let inputSearch = document.getElementById("search").value;
+  var variableVacia = ""; //levarla global?
   agenda.forEach((contacto) => {
-    console.log(agenda.length);
-    if (inputSearch == contacto.apellido) {
-      alert("hola");
+    let { dni, nombre, apellido, telefono } = contacto;
+    if (inputSearch === contacto.apellido) {
+      inputSearch = variableVacia;
+      renderBusqueda(variableVacia);
     }
   });
-  e.preventDefault();
-}); */
+});
+
+const renderBusqueda = () => {
+  contactosBusqueda.innerText = "";
+  if (agenda.length > 0) {
+    agenda.forEach((contacto) => {
+      //muestra los contactos ya agendados y los nuevos
+      let { dni, nombre, apellido, telefono } = contacto;
+      let nuevoDivBusqueda = document.createElement("div");
+      nuevoDivBusqueda.classList.add("panel1");
+      nuevoDivBusqueda.innerHTML = `<div class="panel1">
+      
+      <div class="details">
+          <h5 class ="documento">${dni}</h5>
+          <h5 class="nombre">${nombre}</h5>
+          <h5 class = "apellido">${apellido}<h5>
+          <button data-id = "${dni}" class="btn btn-danger" id = "botonQuitar">Eliminar</button>
+      </div>
+   </div>
+      `;
+      contactosBusqueda.appendChild(nuevoDivBusqueda);
+    });
+  }
+};
