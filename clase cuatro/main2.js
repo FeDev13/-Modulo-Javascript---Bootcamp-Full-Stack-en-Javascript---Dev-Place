@@ -8,6 +8,7 @@ const contactosLista = document.getElementById("contenedorContactos");
 const contactosBusqueda = document.getElementById("contenedorBusqueda");
 const form = document.getElementById("form");
 const buttonOrdenar = document.getElementById("ordenarAgenda");
+const buttonLimpiar = document.getElementById("limpiar");
 
 let agenda = [
   { dni: 35655823, nombre: "Pepe", apellido: "Luis", telefono: 44555444 },
@@ -96,7 +97,7 @@ let eliminarPorDNI = (dni) => {
 };
 
 const renderAgenda = () => {
-  contactosLista.innerText = "";
+  contactosLista.innerHTML = "";
   if (agenda.length > 0) {
     agenda.forEach((contacto) => {
       //muestra los contactos ya agendados y los nuevos
@@ -138,26 +139,18 @@ buttonAgregar.addEventListener("click", () => {
   form.reset();
 });
 
+buttonLimpiar.addEventListener("click", () => {
+  nuevoDiv.innerHTML = "";
+});
+
 //buscar
 document.getElementById("buscar").addEventListener("click", (e) => {
   e.preventDefault();
   let inputSearch = document.getElementById("search").value;
-  var variableVacia = ""; //levarla global?
   agenda.forEach((contacto) => {
     let { dni, nombre, apellido, telefono } = contacto;
     if (inputSearch === contacto.apellido) {
-      inputSearch = variableVacia;
-      renderBusqueda(variableVacia);
-    }
-  });
-});
-
-const renderBusqueda = () => {
-  contactosBusqueda.innerText = "";
-  if (agenda.length > 0) {
-    agenda.forEach((contacto) => {
-      //muestra los contactos ya agendados y los nuevos
-      let { dni, nombre, apellido, telefono } = contacto;
+      contactosBusqueda.innerText = "";
       let nuevoDivBusqueda = document.createElement("div");
       nuevoDivBusqueda.classList.add("panel1");
       nuevoDivBusqueda.innerHTML = `<div class="panel1">
@@ -165,12 +158,13 @@ const renderBusqueda = () => {
       <div class="details">
           <h5 class ="documento">${dni}</h5>
           <h5 class="nombre">${nombre}</h5>
-          <h5 class = "apellido">${apellido}<h5>
+          <h5 class = "apellido">${apellido}</h5>
+          <h5 class = "telefono"> ${telefono}</h5>
           <button data-id = "${dni}" class="btn btn-danger" id = "botonQuitar">Eliminar</button>
       </div>
    </div>
       `;
       contactosBusqueda.appendChild(nuevoDivBusqueda);
-    });
-  }
-};
+    }
+  });
+});
